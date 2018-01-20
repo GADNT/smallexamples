@@ -2,6 +2,7 @@ package com.moelholm;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.moelholm.base.IntegrationTest;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;

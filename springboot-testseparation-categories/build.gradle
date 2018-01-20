@@ -27,13 +27,13 @@ repositories {
 
 test {
     useJUnit {
-        includeCategories 'com.moelholm.UnitTest'
+        includeCategories 'com.moelholm.base.UnitTest'
     }
 }
 
 task integrationTest(type: Test) {
     useJUnit {
-        includeCategories 'com.moelholm.IntegrationTest'
+        includeCategories 'com.moelholm.base.IntegrationTest'
     }
 }
 

@@ -1,4 +1,4 @@
-package com.moelholm;
+package com.moelholm.base;
 
 /**
  * A JUnit category marker interface for integration tests.
