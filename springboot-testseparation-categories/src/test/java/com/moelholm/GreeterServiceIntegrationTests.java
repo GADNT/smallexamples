@@ -23,9 +23,8 @@ public class GreeterServiceIntegrationTests {
 
     // When
     String greeting = greeterService.sayHello("Duke");
-
     // Then
-    assertThat(greeting).isEqualTo("Hello World, Duke");
+    assertThat(greeting).isEqualTo("Hello World, Duke".toUpperCase());
 
   }
 

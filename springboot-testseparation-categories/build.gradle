@@ -12,6 +12,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'spring-boot'
+apply plugin: 'jacoco'
 
 jar {
     baseName = 'springboot-testseparation-categories'
@@ -31,13 +32,64 @@ test {
     }
 }
 
-task integrationTest(type: Test) {
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.7.3'
+    testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.7.3'
+}
+
+
+jacoco {
+    toolVersion = "0.7.9"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+//start--use
+
+apply plugin: 'eclipse'
+
+//
+//configurations {
+//    integrationTestCompile.extendsFrom testCompile
+//    integrationTestRuntime.extendsFrom testRuntime
+//}
+
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+
+//sourceSets {
+//    integrationTest {
+//        java {
+//            compileClasspath += main.output + test.output
+//            runtimeClasspath += main.output + test.output
+//            srcDir file('src/test/java')
+//        }
+////        resources.srcDir file('src/integTest/resources')
+//    }
+//}
+
+
+task integrationTest(type: Test){
+    description = 'Run the integration tests.'
+//    group = 'verification'
+//    testClassesDir = sourceSets.integrationTest.output.classesDir
+//    classpath = sourceSets.integrationTest.runtimeClasspath
     useJUnit {
         includeCategories 'com.moelholm.base.IntegrationTest'
     }
 }
 
-dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+task jacocoIntegrationTestReport(type: JacocoReport){
+//    sourceSets sourceSets.main
+//    executionData test integrationTest
 }
+
+//end

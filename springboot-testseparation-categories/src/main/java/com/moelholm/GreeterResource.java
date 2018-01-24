@@ -16,6 +16,10 @@ public class GreeterResource {
     @Autowired
     GreeterService greeterService;
 
+    public GreeterResource(GreeterService greeterService) {
+        this.greeterService = greeterService;
+    }
+
     @GetMapping(path = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> performGreet(@PathVariable(value = "name") String... name) {
 
